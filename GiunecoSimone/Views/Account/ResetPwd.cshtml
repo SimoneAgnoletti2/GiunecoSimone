@@ -1,6 +1,7 @@
 ﻿@model GiunecoSimone.Models.ResetPwd
 
 @{
+    Layout = "~/Views/Shared/PreLayout.cshtml";
     ViewBag.Title = "Password Reset";
 }
 
@@ -8,6 +9,19 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+    if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+    {
+        <div class="alert alert-success">
+            <strong>Fatto!</strong> Password cambiata. Clicca qui per @Html.ActionLink("accedere", "Login")
+        </div>
+    }
+    else if (ViewBag.Message != null && ViewBag.Message != "")
+    {
+        <div class="alert alert-danger">
+            <strong>Errore!</strong> @ViewBag.Message
+        </div>
+    }
 
     <div class="form-horizontal">
         <hr />
@@ -43,19 +57,6 @@
             </div>
         </div>
     </div>
-
-    if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-    {
-        <div class="alert alert-success">
-            <strong>Fatto!</strong> Password cambiata. Clicca qui per @Html.ActionLink("accedere", "Login")
-        </div>
-    }
-    else if(ViewBag.Message != null && ViewBag.Message!= "")
-    {
-        <div class="alert alert-danger">
-            <strong>Errore!</strong> @ViewBag.Message
-        </div>
-    }
 }
 
 @section Scripts {

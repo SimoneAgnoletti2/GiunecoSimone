@@ -38,6 +38,5 @@ namespace GiunecoSimone.Models
         [Compare("Pwd", ErrorMessage = "Le due password non corrispondono")]
         public string ConfirmPwd { get; set; }
 
-
     }
 }

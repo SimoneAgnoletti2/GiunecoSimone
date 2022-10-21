@@ -1,6 +1,7 @@
 ﻿@model GiunecoSimone.Class.UserLogin
 
 @{
+    Layout = "~/Views/Shared/PreLayout.cshtml";
     ViewBag.Title = "Login";
 }
 
@@ -17,6 +18,13 @@
 }
 else
 {
+    if (ViewBag.Message != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Errore!</strong> @ViewBag.Message
+        </div>
+    }
+
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -46,13 +54,6 @@ else
                 </div>
             </div>
         </div>
-
-        if (ViewBag.Message != null)
-        {
-            <div class="alert alert-danger">
-                <strong>Errore!</strong> @ViewBag.Message
-            </div>
-        }
     }
 }
 

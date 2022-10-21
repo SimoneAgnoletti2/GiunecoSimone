@@ -129,12 +129,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\Crypto.cs" />
+    <Compile Include="Class\ServiceTasks.cs" />
     <Compile Include="Class\UserLogin.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Enumerator\State.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ITasks.cs" />
+    <Compile Include="Models\Extend\Tasks.cs" />
     <Compile Include="Models\Extend\Users.cs" />
     <Compile Include="Models\giuneco.Context.cs">
       <AutoGen>True</AutoGen>
@@ -156,6 +160,9 @@
       <DependentUpon>giuneco.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
+      <DependentUpon>giuneco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersTasks.cs">
       <DependentUpon>giuneco.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -214,13 +221,15 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Signup.cshtml" />
     <Content Include="Views\Account\VerifyAccount.cshtml" />
     <Content Include="Views\Shared\PreLayout.cshtml" />
     <Content Include="Views\Account\ForgotPwd.cshtml" />
     <Content Include="Views\Account\ResetPwd.cshtml" />
+    <Content Include="Views\Home\CreateTask.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

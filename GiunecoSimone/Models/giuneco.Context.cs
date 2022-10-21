@@ -27,5 +27,6 @@ namespace GiunecoSimone.Models
     
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<UsersTasks> UsersTasks { get; set; }
     }
 }

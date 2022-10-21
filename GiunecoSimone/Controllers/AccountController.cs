@@ -23,10 +23,8 @@ namespace GiunecoSimone.Controllers
             return View();
         }
 
-        //no cache
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult SignUp([Bind(Exclude = "IsEmailVerified,ActivationCode")] Users user)
         {
             var Status = false;
@@ -122,7 +120,6 @@ namespace GiunecoSimone.Controllers
         //no cache
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult LogIn(UserLogin userLogin)
         {
             var message = string.Empty;
@@ -140,6 +137,7 @@ namespace GiunecoSimone.Controllers
                         else
                         {
                             FormsAuthentication.SetAuthCookie(compare.FirstName + "\t" + compare.LastName, false);
+                            Session["UserID"] = compare.Id;
                             return RedirectToAction("Home", "Home");
                         }
                     }
@@ -160,7 +158,6 @@ namespace GiunecoSimone.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
@@ -175,7 +172,6 @@ namespace GiunecoSimone.Controllers
         }
 
         [HttpPost]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult ForgotPwd(string emailID)
         {
             var message = string.Empty;
@@ -201,7 +197,6 @@ namespace GiunecoSimone.Controllers
             return View();
         }
 
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult ResetPwd(string id)
         {
             using (giuneco_Entities ue = new giuneco_Entities())
@@ -222,7 +217,6 @@ namespace GiunecoSimone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult ResetPwd(ResetPwd rp)
         {
             try

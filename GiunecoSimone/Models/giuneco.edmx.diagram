@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="57167c548f894fe295954cdb4841b724" Name="Diagram1">
-        <EntityTypeShape EntityType="giunecoModel.Tasks" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="giunecoModel.Users" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="giunecoModel.FK_Task_ToTable" ManuallyRouted="false" />
+      <Diagram DiagramId="ddf86b23f1304fe7bae7452d4187dd32" Name="Diagram1">
+        <EntityTypeShape EntityType="giunecoModel.Tasks" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="giunecoModel.Users" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="giunecoModel.UsersTasks" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
