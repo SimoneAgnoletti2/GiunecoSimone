@@ -8,8 +8,10 @@ namespace GiunecoSimone.Enumerator
         [Display(Name = "Backlog")]
         Backlog = 1,
         [Display(Name = "In Progress")]
-        InProgress = 2,
+        Attivi = 2,
         [Display(Name = "Completed")]
-        Completed = 3,
+        Completati = 3,
+        [Display(Name = "Tutti")]
+        Tutti = 3,
     }
 }

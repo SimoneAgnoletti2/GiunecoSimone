@@ -13,5 +13,7 @@ namespace GiunecoSimone.Interfaces
         IEnumerable<Tasks> GetAllTasks();
 
         IEnumerable<Tasks> GetTasks(State state, string idUser);
+
+        bool DeleteTask(string idTask);
     }
 }

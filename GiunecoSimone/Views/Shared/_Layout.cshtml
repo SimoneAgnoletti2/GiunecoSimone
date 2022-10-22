@@ -23,9 +23,6 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-center">
-                        <li>@Html.ActionLink("Inserisci nuova attività", "CreateTask", "Home")</li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-center">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Lista attività
@@ -33,10 +30,14 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>@Html.ActionLink("Backlog", "Home", new { id = 1 })</li>
-                                <li>@Html.ActionLink("In progress", "Home", new { id = 2 })</li>
-                                <li>@Html.ActionLink("Completed", "Home", new { id = 3 })</li>
+                                <li>@Html.ActionLink("Attivi", "Home", new { id = 2 })</li>
+                                <li>@Html.ActionLink("Completati", "Home", new { id = 3 })</li>
+                                <li>@Html.ActionLink("Tutti", "Home", new { id = 4 })</li>
                             </ul>
                         </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-center">
+                        <li>@Html.ActionLink("Inserisci nuova attività", "CreateTask", "Home")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>

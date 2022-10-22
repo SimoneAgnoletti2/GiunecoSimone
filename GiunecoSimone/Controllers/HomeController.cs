@@ -94,5 +94,32 @@ namespace GiunecoSimone.Controllers
             }
             return RedirectToAction("Login", "Account");
         }
+
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            var status = false;
+            var message = string.Empty;
+
+            if (Session["UserId"] != null)
+            {
+                ITasks service;
+                service = new ServiceTasks();
+                var result = service.DeleteTask(id);
+                if (result)
+                {
+                    status = true;
+                    message = "Task cancellato!";
+                }
+                else
+                    message = "Errore nella cancellazione del task";
+
+                ViewBag.Message = message;
+                ViewBag.Status = status;
+
+                return RedirectToAction("Home", "Home");
+            }
+            return RedirectToAction("Login", "Account");
+        }
     }
 }

@@ -274,7 +274,7 @@ namespace GiunecoSimone.Controllers
 
             var email = new MailAddress("agnolettisimone@gmail.com", "Simone Agnoletti");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPWD = "wvnipsgekkxuvndu";
+            var fromEmailPWD = "sghhdornzoktmqjm";
 
             var subject = string.Empty;
             var body = string.Empty;
@@ -313,7 +313,7 @@ namespace GiunecoSimone.Controllers
                 IsBodyHtml = true
             })
 
-                smtp.Send(message);
+            smtp.Send(message);
         }
 
     }
