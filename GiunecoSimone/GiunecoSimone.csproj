@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Class\Comments.cs" />
     <Compile Include="Class\Crypto.cs" />
     <Compile Include="Class\ServiceTasks.cs" />
     <Compile Include="Class\UserLogin.cs" />
@@ -138,6 +139,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ITasks.cs" />
+    <Compile Include="Models\EditTask.cs" />
+    <Compile Include="Models\Extend\EnumHelperTask.cs" />
     <Compile Include="Models\Extend\Tasks.cs" />
     <Compile Include="Models\Extend\Users.cs" />
     <Compile Include="Models\giuneco.Context.cs">
@@ -230,6 +233,7 @@
     <Content Include="Views\Home\CreateTask.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Home\EditTask.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

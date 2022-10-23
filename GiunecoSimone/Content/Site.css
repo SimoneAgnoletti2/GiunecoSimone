@@ -28,3 +28,73 @@ textarea {
     background-color: #777;
     border-color: #fff
 }
+
+.Completati:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 50px 50px 0;
+    border-style: solid;
+    border-color: #00e600 #fff;
+}
+
+.Completati {
+    position: relative;
+    padding: 1em 1.5em;
+    margin: 2em auto;
+    color: #fff;
+    background-color: #e6ffe6;
+}
+
+.Attivi:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 50px 50px 0;
+    border-style: solid;
+    border-color: #e6e600 #fff;
+}
+
+.Attivi {
+    position: relative;
+    padding: 1em 1.5em;
+    margin: 2em auto;
+    color: #fff;
+    background-color: #ffffcc;
+}
+
+.Backlog:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 50px 50px 0;
+    border-style: solid;
+    border-color: #737373 #fff;
+}
+
+.Backlog {
+    position: relative;
+    padding: 1em 1.5em;
+    margin: 2em auto;
+    color: #fff;
+    background-color: #f2f2f2;
+}
+
+.thumbnail{
+    border: 0px;
+}
+
+.tr1 {
+    background-color: #f2f2f2;
+}
+
+.tr2 {
+    background-color: #ffffcc;
+}
+
+.tr3 {
+    background-color: #e6ffe6;
+}

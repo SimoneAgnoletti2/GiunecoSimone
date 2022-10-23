@@ -12,6 +12,16 @@ namespace GiunecoSimone.Enumerator
         [Display(Name = "Completed")]
         Completati = 3,
         [Display(Name = "Tutti")]
-        Tutti = 3,
+        Tutti = 4,
+    }
+
+    public enum StateEdit
+    {
+        [Display(Name = "Backlog")]
+        Backlog = 1,
+        [Display(Name = "In Progress")]
+        Attivi = 2,
+        [Display(Name = "Completed")]
+        Completati = 3,
     }
 }

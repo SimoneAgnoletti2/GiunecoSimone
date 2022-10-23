@@ -16,9 +16,10 @@ namespace GiunecoSimone.Class
 
         public Tasks GetTasks(string idTask)
         {
+            var id = Guid.Parse(idTask);
             using (giuneco_Entities eu = new giuneco_Entities())
             {
-                task = eu.Tasks.Where(x => x.Id.Equals(idTask)).FirstOrDefault();
+                task = eu.Tasks.Where(x => x.Id.Equals(id)).FirstOrDefault();
             }
             return task;
         }
@@ -71,6 +72,57 @@ namespace GiunecoSimone.Class
                 }
             }
             catch { return false; }
+        }
+
+        public int GetTotalWorkedHour(string idTask)
+        {
+            try
+            {
+                var id = Guid.Parse(idTask);
+                var total = 0;
+                using (giuneco_Entities eu = new giuneco_Entities())
+                {
+                    total = Convert.ToInt32(eu.UsersTasks.Where(x => x.IdTask.Equals(id))
+                        .Select(x => x.WorkedHour).ToList().Sum());
+                }
+                return total;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public IEnumerable<Comments> GetComments(string idTask)
+        {
+            var id = Guid.Parse(idTask);
+            var comment = new Comments();
+            var comments = new List<Comments>();
+
+            using (giuneco_Entities eu = new giuneco_Entities())
+            {
+                List<string> comm = new List<string>();
+                List<DateTime?> dat = new List<DateTime?>();
+
+                comm = eu.UsersTasks.Where(x => x.IdTask.Equals(id)
+                && !string.IsNullOrEmpty(x.Comment))
+                    .OrderByDescending(x => x.CommentDate)
+                    .Select(x => x.Comment).ToList();
+
+                dat = eu.UsersTasks.Where(x => x.IdTask.Equals(id)
+                && !string.IsNullOrEmpty(x.Comment))
+                    .OrderByDescending(x => x.CommentDate)
+                    .Select(x => x.CommentDate).ToList();
+
+                for(int i = 0; i < comm.Count; i++)
+                {
+                    comment.date = dat[i];
+                    comment.comment = comm[i];
+
+                    comments.Add(comment);
+                }
+            }
+            return comments;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GiunecoSimone.Enumerator;
+﻿using GiunecoSimone.Class;
+using GiunecoSimone.Enumerator;
 using GiunecoSimone.Models;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,9 @@ namespace GiunecoSimone.Interfaces
         IEnumerable<Tasks> GetTasks(State state, string idUser);
 
         bool DeleteTask(string idTask);
+
+        int GetTotalWorkedHour(string idTask);
+
+        IEnumerable<Comments> GetComments(string idTask);
     }
 }
