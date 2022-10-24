@@ -17,7 +17,7 @@ namespace GiunecoSimone.Models
         [NotMapped]
         public string FullName
         {
-            get { return FirstName + " " + LastName; }
+            get { return FirstName + " " + LastName + " (" + EmailID + ")"; }
         }
     }
 }

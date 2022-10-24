@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace GiunecoSimone.Class
@@ -96,7 +97,6 @@ namespace GiunecoSimone.Class
         public IEnumerable<Comments> GetComments(string idTask)
         {
             var id = Guid.Parse(idTask);
-            var comment = new Comments();
             var comments = new List<Comments>();
 
             using (giuneco_Entities eu = new giuneco_Entities())
@@ -116,6 +116,7 @@ namespace GiunecoSimone.Class
 
                 for(int i = 0; i < comm.Count; i++)
                 {
+                    var comment = new Comments();
                     comment.date = dat[i];
                     comment.comment = comm[i];
 
@@ -155,6 +156,17 @@ namespace GiunecoSimone.Class
             }
 
             return users;
+        }
+
+        public Users GetUser(string emailId)
+        {
+            var user = new Users();
+
+            using (giuneco_Entities eu = new giuneco_Entities())
+            {
+                user = eu.Users.Where(x => x.EmailID.Equals(emailId)).FirstOrDefault();
+            }
+            return user;
         }
     }
 }

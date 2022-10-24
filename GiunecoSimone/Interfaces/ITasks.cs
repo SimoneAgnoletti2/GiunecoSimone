@@ -23,5 +23,7 @@ namespace GiunecoSimone.Interfaces
         IEnumerable<Users> GetUsersForTask(string idTask);
 
         IEnumerable<Users> GetUsers(string idTask);
+
+        Users GetUser(string emailId);
     }
 }

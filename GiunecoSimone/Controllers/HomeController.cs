@@ -16,6 +16,8 @@ namespace GiunecoSimone.Controllers
 {
     public class HomeController : Controller
     {
+        private static List<Users> useredit;
+
         [HttpGet]
         public ActionResult Home(int? id, int? choose)
         {
@@ -137,7 +139,7 @@ namespace GiunecoSimone.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditTask(string id)
+        public ActionResult EditTask(string id, string idUserTasks)
         {
             var userTask = new EditTaskMetaData();
             if (Session["UserId"] != null)
@@ -147,31 +149,140 @@ namespace GiunecoSimone.Controllers
                     ITasks service;
                     service = new ServiceTasks();
                     var task = service.GetTasks(id);
+                    Session["TaskId"] = id;
+                    //Session["UserTaskId"] = idUserTasks;
                     ViewBag.TitleTask = task.Title;
                     userTask.Description = task.Description;
                     userTask.Date = task.Date;
                     State state = (State)task.State;
                     userTask.State = state;
+                    ViewBag.State = state;
                     userTask.newComment = string.Empty;
                     userTask.TotalWorkedHour = service.GetTotalWorkedHour(id);
                     userTask.Comments = service.GetComments(id);
+                    ViewBag.Comments = new List<Comments>();
+                    ViewBag.Comments = userTask.Comments;
                     userTask.Users = service.GetUsersForTask(id);
+                    ViewBag.Users = new List<Users>();
+                    ViewBag.Users = userTask.Users;
                     userTask.UsersAvailable = service.GetUsers(id);
+                    ViewBag.UsersAvailable = new List<Users>();
+                    ViewBag.UsersAvailable = userTask.UsersAvailable;
                     return View(userTask);
                 }
-                return View();
+                return View(userTask);
             }
             return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]
-        public ActionResult EditTask(EditTaskMetaData usertask)
+        public ActionResult EditTask(EditTaskMetaData editTaskMetaData)
         {
+            var message = string.Empty;
+            var status = false;
+
+            ITasks service;
+            service = new ServiceTasks();
+            if (Session["UserId"] != null && Session["TaskId"] != null)
+            {
+                try
+                {
+                    var tasks = new Tasks();
+                    var users = new List<Users>();
+                    var usertasks = new List<UsersTasks>();
+                    Guid idTask = Guid.Parse(Session["TaskId"].ToString());
+                    Guid idUser = Guid.Parse(Session["UserId"].ToString());
+                    editTaskMetaData.Users = new List<Users>();
+                    editTaskMetaData.Users = useredit;
+
+                    using (giuneco_Entities ue = new giuneco_Entities())
+                    {
+                        tasks = ue.Tasks.Where(x => x.Id.Equals(idTask)).FirstOrDefault();
+
+                        usertasks = ue.UsersTasks.Where(x => x.IdTask.Equals(idTask)).ToList();
+                        var useTasksInsert = new UsersTasks();
+                        var description = ue.Tasks.Where(x => x.Id.Equals(idTask)).FirstOrDefault().Description = editTaskMetaData.Description;
+                        var state = ue.Tasks.Where(x => x.Id.Equals(idTask)).FirstOrDefault().State = (int)editTaskMetaData.State;
+
+                        tasks.Id = idTask;
+                        tasks.Description = editTaskMetaData.Description;
+                        tasks.State = (int)editTaskMetaData.State;
+                        
+
+
+                        if (!string.IsNullOrEmpty(editTaskMetaData.newComment))
+                        {
+                            useTasksInsert.Comment = editTaskMetaData.newComment;
+                            useTasksInsert.CommentDate = DateTime.Now;
+                        }
+                        useTasksInsert.WorkedHour = editTaskMetaData.WorkedHour;
+                        useTasksInsert.Id = Guid.NewGuid();
+                        useTasksInsert.IdTask = idTask;
+                        useTasksInsert.IdUser = idUser;
+                        ue.UsersTasks.Add(useTasksInsert);
+                        ue.SaveChanges();
+
+                        foreach(var adduser in useredit)
+                        {
+                            if (!idUser.Equals(adduser.Id))
+                            {
+                                var usertasksAdd = new UsersTasks();
+                                usertasksAdd.IdUser = adduser.Id;
+                                usertasksAdd.IdTask = idTask;
+                                usertasksAdd.Comment = null;
+                                usertasksAdd.CommentDate = null;
+                                usertasksAdd.WorkedHour = 0;
+                                usertasksAdd.Id = Guid.NewGuid();
+                                ue.UsersTasks.Add(usertasksAdd);
+                                ue.SaveChanges();
+                            }
+                        }
+                        Session["TaskId"] = null;
+
+                        message = "Aggiornamento completato!";
+                        status = true;
+                    }
+                    ViewBag.Message = message;
+                    ViewBag.Status = status;
+                    return RedirectToAction("Home", "Home");
+                }
+                catch(Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    ViewBag.Status = status;
+                    return RedirectToAction("Home", "Home");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpPost]
+        public void EditTaskUser(List<string> users)
+        {
+            ITasks service;
+            service = new ServiceTasks();
             if (Session["UserId"] != null)
             {
-
+                try
+                {
+                    if (users != null)
+                    {
+                        useredit = new List<Users>();
+                        foreach (var edit in users)
+                        {
+                            var email = edit.Split(new string[] { "(" }, StringSplitOptions.None)[1].Split(new string[] { ")" }, StringSplitOptions.None)[0];
+                            var us = service.GetUser(email);
+                            useredit.Add(us);
+                        }
+                    }
+                }
+                catch 
+                {
+                }
             }
-            return View();
         }
     }
 }
