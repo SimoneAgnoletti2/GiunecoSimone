@@ -32,7 +32,7 @@ namespace GiunecoSimone.Models
         public DateTime Date { get; set; }
 
         [Display(Name = "Stato")]
-        public StateEdit State { get; set; }
+        public State State { get; set; }
 
         [Display(Name = "Ore lavorate")]
         [RegularExpression(@"[1-9][0-9]*", ErrorMessage = "Valore inserito non valido")]
@@ -46,6 +46,6 @@ namespace GiunecoSimone.Models
         public IEnumerable<Comments> Comments { get; set; }
 
         [Display(Name = "Team di sviluppo")]
-        public List<Users> Users { get; set; }
+        public IEnumerable<Users> Users { get; set; }
     }
 }

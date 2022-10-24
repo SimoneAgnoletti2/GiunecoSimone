@@ -150,11 +150,11 @@ namespace GiunecoSimone.Controllers
                     ViewBag.TitleTask = task.Title;
                     userTask.Description = task.Description;
                     userTask.Date = task.Date;
-                    StateEdit state = (StateEdit)task.State;
+                    State state = (State)task.State;
                     userTask.State = state;
                     userTask.TotalWorkedHour = service.GetTotalWorkedHour(id);
                     userTask.Comments = service.GetComments(id);
-
+                    userTask.Users = service.GetUsersForTask(id);
                     return View(userTask);
                 }
                 return View();

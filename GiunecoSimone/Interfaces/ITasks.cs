@@ -20,5 +20,6 @@ namespace GiunecoSimone.Interfaces
         int GetTotalWorkedHour(string idTask);
 
         IEnumerable<Comments> GetComments(string idTask);
+        IEnumerable<Users> GetUsersForTask(string idTask);
     }
 }

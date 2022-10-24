@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GiunecoSimone.Models
 {
@@ -12,5 +13,11 @@ namespace GiunecoSimone.Models
         public bool IsEmailVerified { get; set; }
         public Guid ActivationCode { get; set; }
         public string ResetPwdCode { get; set; }
+
+        [NotMapped]
+        public string FullName
+        {
+            get { return FirstName + " " + LastName + " (" + EmailID + ")"; }
+        }
     }
 }

@@ -124,5 +124,21 @@ namespace GiunecoSimone.Class
             }
             return comments;
         }
+
+        public IEnumerable<Users> GetUsersForTask(string idTask)
+        {
+            var id = Guid.Parse(idTask);
+            var users = new List<Users>();
+
+            using (giuneco_Entities eu = new giuneco_Entities())
+            {
+                var usersList = eu.UsersTasks.Where(x => x.IdTask.Equals(id)).
+                    Select(x => x.IdUser).ToList();
+
+                users = eu.Users.Where(x => usersList.Contains(x.Id)).ToList();
+            }
+
+            return users;
+        }
     }
 }
