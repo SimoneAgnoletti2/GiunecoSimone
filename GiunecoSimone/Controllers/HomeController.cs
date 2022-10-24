@@ -19,13 +19,13 @@ namespace GiunecoSimone.Controllers
         [HttpGet]
         public ActionResult Home(int? id, int? choose)
         {
-            if(choose != null)
+            if (choose != null)
                 ViewBag.Choose = choose;
             else
                 ViewBag.Choose = 0;
 
             State state;
-            if(id != null)
+            if (id != null)
             {
                 state = (State)id;
             }
@@ -152,9 +152,11 @@ namespace GiunecoSimone.Controllers
                     userTask.Date = task.Date;
                     State state = (State)task.State;
                     userTask.State = state;
+                    userTask.newComment = string.Empty;
                     userTask.TotalWorkedHour = service.GetTotalWorkedHour(id);
                     userTask.Comments = service.GetComments(id);
                     userTask.Users = service.GetUsersForTask(id);
+                    userTask.UsersAvailable = service.GetUsers(id);
                     return View(userTask);
                 }
                 return View();
@@ -162,49 +164,14 @@ namespace GiunecoSimone.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        //[HttpPost]
-        //public ActionResult EditTask(EditTaskMetaData editTaskMeta)
-        //{
-        //    if (Session["UserId"] != null)
-        //    {
-        //        var status = false;
-        //        var message = string.Empty;
-        //        try
-        //        {
-        //            newTask.Id = Guid.NewGuid();
-        //            newTask.State = (int)State.Backlog;
-        //            newTask.Date = DateTime.Now;
+        [HttpPost]
+        public ActionResult EditTask(EditTaskMetaData usertask)
+        {
+            if (Session["UserId"] != null)
+            {
 
-        //            UsersTasks ut = new UsersTasks();
-        //            ut.IdUser = Guid.Parse(Session["UserID"].ToString());
-        //            ut.IdTask = newTask.Id;
-        //            ut.WorkedHour = 0;
-
-        //            using (giuneco_Entities ue = new giuneco_Entities())
-        //            {
-        //                ue.Tasks.Add(newTask);
-
-        //                ue.UsersTasks.Add(ut);
-
-        //                ue.SaveChanges();
-
-        //                status = true;
-        //                message = "Attività registrata con successo";
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            status = true;
-        //            message = $"Errore:  {ex.Message}";
-        //        }
-
-        //        ViewBag.Message = message;
-        //        ViewBag.Status = status;
-
-        //        return View();
-        //    }
-        //    return RedirectToAction("Login", "Account");
-        //}
-
+            }
+            return View();
+        }
     }
 }

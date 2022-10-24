@@ -7,6 +7,36 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <style>
+        #sortable1, #sortable2 {
+            border: 1px solid #eee;
+            width: 200px;
+            min-height: 20px;
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 0 0 0;
+            float: left;
+            margin-right: 10px;
+        }
+
+            #sortable1 li, #sortable2 li {
+                margin: 0 5px 5px 5px;
+                padding: 5px;
+                font-size: 1.2em;
+                width: 180px;
+            }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+  $( function() {
+    $( "#sortable1, #sortable2" ).sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+  } );
+    </script>
 </head>
 <body>
     @if (Request.IsAuthenticated)
@@ -61,7 +91,7 @@
         Response.Redirect("../Account/Login");
     }
 
-        @Scripts.Render("~/bundles/jquery")
+        @*@Scripts.Render("~/bundles/jquery")*@
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
     </body>

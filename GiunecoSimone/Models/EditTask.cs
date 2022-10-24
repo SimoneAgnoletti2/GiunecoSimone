@@ -43,9 +43,17 @@ namespace GiunecoSimone.Models
         [DataType(DataType.Text)]
 
         public int TotalWorkedHour { get; set; } = 0;
+
+        [Display(Name = "Nuovo commento")]
+        [DataType(DataType.Text)]
+
+        public string newComment { get; set; }
         public IEnumerable<Comments> Comments { get; set; }
 
         [Display(Name = "Team di sviluppo")]
         public IEnumerable<Users> Users { get; set; }
+
+        [Display(Name = "Assegna a")]
+        public IEnumerable<Users> UsersAvailable { get; set; }
     }
 }

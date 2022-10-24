@@ -21,5 +21,7 @@ namespace GiunecoSimone.Interfaces
 
         IEnumerable<Comments> GetComments(string idTask);
         IEnumerable<Users> GetUsersForTask(string idTask);
+
+        IEnumerable<Users> GetUsers(string idTask);
     }
 }
