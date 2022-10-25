@@ -146,6 +146,7 @@ namespace GiunecoSimone.Controllers
             {
                 if (id != null)
                 {
+                    useredit = new List<Users>();
                     ITasks service;
                     service = new ServiceTasks();
                     var task = service.GetTasks(id);
